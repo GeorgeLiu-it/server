@@ -1,0 +1,84 @@
+captcha:
+    height: 80
+    width: 240
+    length: 6
+    max_skew: 0.7
+    dot_count: 80
+email:
+    host: smtp.avaya.com
+    port: 465
+    from: xxx@avaya.com
+    nickname: George
+    secret: xxxxxxxxxxxxxxxx
+    is_ssl: true
+es:
+    url: https://192.168.68.248:9200
+    username: elastic
+    password: w8cdYEtzZ9+WLf1xZGIp
+    is_console_print: true
+jwt:
+    access_token_secret: access_token_secret
+    refresh_token_secret: refresh_token_secret
+    access_token_expiry_time: 2h
+    refresh_token_expiry_time: 7d
+    issuer: go_blog
+mysql:
+    host: 127.0.0.1
+    port: 3306
+    config: charset=utf8mb4&parseTime=True&loc=Local
+    db_name: blog_db
+    username: root
+    password: "123456"
+    max_idle_conns: 10
+    max_open_conns: 100
+    log_mode: info
+redis:
+    address: 192.168.68.248:6379
+    password: ""
+    db: 0
+system:
+    host: 0.0.0.0
+    port: 8080
+    env: release
+    router_prefix: api
+    use_multipoint: true
+    sessions_secret: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    oss_type: local
+upload:
+    size: 20
+    path: uploads
+website:
+    logo: ""
+    full_logo: ""
+    title: George-ake-avaya
+    slogan: yonop
+    slogan_en: Blog Title
+    description: yonop
+    version: 1.0.0
+    created_at: "2025-1-15"
+    icp_filing: ICP
+    public_security_filing: xxxxx
+    bilibili_url: xxxxx
+    gitee_url: xxxxxx
+    github_url: xxxxxx
+    name: George
+    job: job
+    address: addr
+    email: xxx@avaya.com
+    qq_image: ""
+    wechat_image: ""
+zap:
+    level: info
+    filename: log/go_blog.log
+    max_size: 200
+    max_backups: 30
+    max_age: 5
+    is_console_print: true
+# qiniu:
+#     zone: z0
+#     bucket: xxx
+#     img_path: https://xxx.xxx/
+#     access_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+#     secret_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+#     use_https: true
+#     use_cdn_domains: true
