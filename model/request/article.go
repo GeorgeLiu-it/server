@@ -38,7 +38,7 @@ type ArticleDelete struct {
 
 type ArticleUpdate struct {
 	ID       string   `json:"id" binding:"required"`
-	Cover    string   `json:"cover" binding:"required"`
+	Cover    string   `json:"cover"`
 	Title    string   `json:"title" binding:"required"`
 	Category string   `json:"category" binding:"required"`
 	Tags     []string `json:"tags" binding:"required"`
