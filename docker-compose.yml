@@ -61,7 +61,7 @@ services:
     networks:
       - blog_net
     healthcheck:
-      test: ["CMD", "/app", "health"]
+      test: ["CMD", "/app", "-health"]
       interval: 30s
       timeout: 10s
       retries: 3
