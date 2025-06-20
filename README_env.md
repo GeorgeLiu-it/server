@@ -127,4 +127,3 @@ sudo hostnamectl set-hostname [hostname]
 sudo vim /etc/hosts
 # add 127.0.1.1 [hostname]
 ```
-
