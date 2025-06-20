@@ -12,18 +12,18 @@ email:
     secret: xxxxxxxxxxxxxxxx
     is_ssl: true
 es:
-    url: https://192.168.68.248:9200
+    url: http://192.168.68.231:9200
     username: elastic
-    password: w8cdYEtzZ9+WLf1xZGIp
+    password: 123456
     is_console_print: true
 jwt:
-    access_token_secret: access_token_secret
-    refresh_token_secret: refresh_token_secret
+    access_token_secret: george
+    refresh_token_secret: george
     access_token_expiry_time: 2h
     refresh_token_expiry_time: 7d
-    issuer: go_blog
+    issuer: george
 mysql:
-    host: 127.0.0.1
+    host: 192.168.68.231
     port: 3306
     config: charset=utf8mb4&parseTime=True&loc=Local
     db_name: blog_db
@@ -33,9 +33,9 @@ mysql:
     max_open_conns: 100
     log_mode: info
 redis:
-    address: 192.168.68.248:6379
+    address: 192.168.68.231:6379
     password: ""
-    db: 4
+    db: 1
 system:
     host: 0.0.0.0
     port: 8080
@@ -74,11 +74,3 @@ zap:
     max_backups: 30
     max_age: 5
     is_console_print: true
-# qiniu:
-#     zone: z0
-#     bucket: xxx
-#     img_path: https://xxx.xxx/
-#     access_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-#     secret_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-#     use_https: true
-#     use_cdn_domains: true

@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.0.0
+    container_name: blog_elasticsearch
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - ES_JAVA_OPTS=${ES_JAVA_OPTS}
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+    volumes:
+      - ${HOME_DIR}/elasticsearch/data:/usr/share/elasticsearch/data
+      - ${HOME_DIR}/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+    restart: unless-stopped
+    networks:
+      - blog_net
+
+  redis:
+    image: redis:latest
+    container_name: blog_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ${HOME_DIR}/redis/data:/data
+    command: ["redis-server", "--appendonly", "yes", "--appendfsync", "everysec"]
+    restart: unless-stopped
+    networks:
+      - blog_net
+
+  mysql:
+    image: mysql:8
+    container_name: blog_mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - ${HOME_DIR}/mysql/data:/var/lib/mysql
+    restart: unless-stopped
+    networks:
+      - blog_net
+
+  blog_server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: blog_server
+    ports:
+      - "8080:8080"
+    volumes:
+      - ${HOME_DIR}/app/config.yaml:/config.yaml:ro
+    depends_on:
+      - elasticsearch
+      - redis
+      - mysql
+    networks:
+      - blog_net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8080/api/base/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+networks:
+  blog_net:
+    driver: bridge

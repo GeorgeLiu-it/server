@@ -1,6 +1,7 @@
 package api
 
 import (
+	"net/http"
 	"server/global"
 	"server/model/request"
 	"server/model/response"
@@ -68,4 +69,10 @@ func (baseApi *BaseApi) SendEmailVerificationCode(c *gin.Context) {
 func (baseApi *BaseApi) QQLoginURL(c *gin.Context) {
 	url := global.Config.QQ.QQLoginURL()
 	response.OkWithData(url, c)
+}
+
+func (baseApi *BaseApi) HealthCheck(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"status": "ok",
+	})
 }
