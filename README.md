@@ -254,6 +254,32 @@ services:
 networks:
   blog_net:
     driver: bridge
+```
 
+**Docker-compose command**
+
+```bash
+docker compose up --build -d
+```
+
+## Host deployment
+
+### Pull from github
+
+```bash
+# pull source code
+git clone -b develop --single-branch https://github.com/GeorgeLiu-it/server.git
+```
+
+**Add .env**
+
+
+
+**Run docker compose**
+
+```bash
+# cd to server folder
+docker compose build
+docker compose up -d
 ```
 
