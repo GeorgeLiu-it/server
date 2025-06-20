@@ -273,7 +273,20 @@ git clone -b develop --single-branch https://github.com/GeorgeLiu-it/server.git
 
 **Add .env**
 
+```txt
+# Paths
+HOME_DIR=/home/george
 
+# ES
+ES_JAVA_OPTS=-Xms1g -Xmx1g
+ELASTIC_PASSWORD=123456
+
+# Mysql
+MYSQL_ROOT_PASSWORD=123456
+MYSQL_DATABASE=blog_db
+MYSQL_USER=george
+MYSQL_PASSWORD=123456
+```
 
 **Run docker compose**
 
@@ -281,5 +294,11 @@ git clone -b develop --single-branch https://github.com/GeorgeLiu-it/server.git
 # cd to server folder
 docker compose build
 docker compose up -d
+
+# stop container
+docker compose stop
+
+# remove container
+docker compose down
 ```
 

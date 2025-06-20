@@ -16,6 +16,10 @@ var (
 		Name:  "avaya",
 		Usage: "Initializes the avaya tables into MySQL db.",
 	}
+	healthFlag = &cli.BoolFlag{
+		Name:  "health",
+		Usage: "Health check for the application",
+	}
 	sqlFlag = &cli.BoolFlag{
 		Name:  "sql",
 		Usage: "Initializes the srtucture of the MySQL database table.",
@@ -63,6 +67,12 @@ func Run(c *cli.Context) {
 			global.Log.Error("Failed to create Avaya related table:", zap.Error(err))
 		} else {
 			global.Log.Info("Successfully created all the avaya tables")
+		}
+	case c.Bool(healthFlag.Name):
+		if err := runHealthCheck(); err != nil {
+			global.Log.Error("Health check function failed:", zap.Error(err))
+		} else {
+			global.Log.Info("Successfully execution of the healthcheck.")
 		}
 	case c.Bool(sqlFlag.Name):
 		if err := SQL(); err != nil {
@@ -124,6 +134,7 @@ func NewApp() *cli.App {
 	app.Name = "Go CLI"
 	app.Flags = []cli.Flag{
 		avayaSQLFlag,
+		healthFlag,
 		sqlFlag,
 		sqlExportFlag,
 		sqlImportFlag,

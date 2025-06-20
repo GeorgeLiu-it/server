@@ -5099,3 +5099,4 @@
 {"level":"INFO","time":"2025-06-20T10:12:46.208+0800","caller":"initialize/corn.go:18","msg":"schedule","keysAndValues":["now","2025-06-20T10:12:46.2077889+08:00","entry",3,"next","2025-06-21T00:00:00+08:00"]}
 {"level":"INFO","time":"2025-06-20T10:12:46.209+0800","caller":"core/server.go:25","msg":"server run success on ","address":"0.0.0.0:8082"}
 {"level":"INFO","time":"2025-06-20T10:13:44.279+0800","caller":"middleware/logger.go:36","msg":"/api/base/health","status":200,"method":"GET","path":"/api/base/health","query":"","ip":"::1","user-agent":"curl/8.12.1","errors":"","cost":0}
+{"level":"ERROR","time":"2025-06-20T12:00:19.980+0800","caller":"initialize/gorm.go:22","msg":"Failed to connect to MySQL:","error":"dial tcp 192.168.68.231:3306: connectex: No connection could be made because the target machine actively refused it."}
