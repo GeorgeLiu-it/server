@@ -21,7 +21,7 @@ docker load < [image.tar]
 **Docker command**
 
 ```bash
-docker run -d --name blog_elasticsearch \
+docker run -d --name adb-es \
   -p 9200:9200 \
   -p 9300:9300 \
   -v $HOME/elasticsearch/data:/usr/share/elasticsearch/data \
@@ -32,7 +32,7 @@ docker run -d --name blog_elasticsearch \
 
 # Elastic yaml config
 # cat elasticsearch.yml
-cluster.name: blog-cluster
+cluster.name: adb-cluster
 node.name: single-node
 network.host: 0.0.0.0
 http.port: 9200
@@ -50,7 +50,7 @@ curl -u elastc:123456 http://192.168.68.231:9200
 
 ```bash
 # Redis with local persistence
-docker run -d --name blog_redis\
+docker run -d --name adb_redis\
   -p 6379:6379 \
   -v $HOME/redis/data:/data \
   redis:latest \
@@ -63,9 +63,9 @@ docker run -d --name blog_redis\
 
 ```bash
 docker run -d \
-  --name blog_mysql \
+  --name adb_mysql \
   -e MYSQL_ROOT_PASSWORD=123456 \
-  -e MYSQL_DATABASE=blog_db \
+  -e MYSQL_DATABASE=adb_db \
   -e MYSQL_USER=george \
   -e MYSQL_PASSWORD=123456 \
   -p 3306:3306 \
@@ -154,10 +154,10 @@ go run main.go -admin
 
   ```bash
   # Generate docker image
-  docker build -t blog_server .
+  docker build -t adb_server .
   
   # Run docker container
-  docker run -d -p 8080:8080 -v $HOME/app/config.yaml:/config.yaml --name blog_server blog_server:latest
+  docker run -d -p 8080:8080 -v $HOME/app/config.yaml:/config.yaml --name blog_server adb_server:latest
   ```
 
 ### Docker-compose to run all-in-0ne
@@ -187,7 +187,7 @@ version: '3.8'
 services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:9.0.0
-    container_name: blog_elasticsearch
+    container_name: adb_elasticsearch
     ports:
       - "9200:9200"
       - "9300:9300"
