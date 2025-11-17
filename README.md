@@ -157,7 +157,7 @@ go run main.go -admin
   docker build -t adb_server .
   
   # Run docker container
-  docker run -d -p 8080:8080 -v $HOME/app/config.yaml:/config.yaml --name blog_server adb_server:latest
+  docker run -d -p 8080:8080 -v $HOME/app/config.yaml:/config.yaml --name adb_server adb_server:latest
   ```
 
 ### Docker-compose to run all-in-0ne
@@ -174,7 +174,7 @@ ELASTIC_PASSWORD=123456
 
 # Mysql
 MYSQL_ROOT_PASSWORD=123456
-MYSQL_DATABASE=blog_db
+MYSQL_DATABASE=adb_db
 MYSQL_USER=george
 MYSQL_PASSWORD=123456
 ```
@@ -199,11 +199,11 @@ services:
       - ${HOME_DIR}/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
     restart: unless-stopped
     networks:
-      - blog_net
+      - adb_net
 
   redis:
     image: redis:latest
-    container_name: blog_redis
+    container_name: adb_redis
     ports:
       - "6379:6379"
     volumes:
@@ -211,11 +211,11 @@ services:
     command: ["redis-server", "--appendonly", "yes", "--appendfsync", "everysec"]
     restart: unless-stopped
     networks:
-      - blog_net
+      - adb_net
 
   mysql:
     image: mysql:8
-    container_name: blog_mysql
+    container_name: adb_mysql
     ports:
       - "3306:3306"
     environment:
@@ -227,13 +227,13 @@ services:
       - ${HOME_DIR}/mysql/data:/var/lib/mysql
     restart: unless-stopped
     networks:
-      - blog_net
+      - adb_net
 
-  blog_server:
+  adb_server:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: blog_server
+    container_name: adb_server
     ports:
       - "8080:8080"
     volumes:
@@ -243,7 +243,7 @@ services:
       - redis
       - mysql
     networks:
-      - blog_net
+      - adb_net
     healthcheck:
       test: ["CMD", "curl", "-f", "http://127.0.0.1:8080/api/base/health"]
       interval: 30s
@@ -252,7 +252,7 @@ services:
     restart: unless-stopped
 
 networks:
-  blog_net:
+  adb_net:
     driver: bridge
 ```
 
@@ -283,7 +283,7 @@ ELASTIC_PASSWORD=123456
 
 # Mysql
 MYSQL_ROOT_PASSWORD=123456
-MYSQL_DATABASE=blog_db
+MYSQL_DATABASE=adb_db
 MYSQL_USER=george
 MYSQL_PASSWORD=123456
 ```

@@ -45,27 +45,27 @@ services:
     networks:
       - adb_net
 
-  adb_server:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: adb_server
-    ports:
-      - "8080:8080"
-    volumes:
-      - ${HOME_DIR}/app/config.yaml:/config.yaml:ro
-    depends_on:
-      - elasticsearch
-      - redis
-      - mysql
-    networks:
-      - adb_net
-    healthcheck:
-      test: ["CMD", "/app", "-health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    restart: unless-stopped
+  # adb_server:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: adb_server
+  #   ports:
+  #     - "8080:8080"
+  #   volumes:
+  #     - ${HOME_DIR}/app/config.yaml:/config.yaml:ro
+  #   depends_on:
+  #     - elasticsearch
+  #     - redis
+  #     - mysql
+  #   networks:
+  #     - adb_net
+  #   healthcheck:
+  #     test: ["CMD", "/app", "-health"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #   restart: unless-stopped
 
 networks:
   adb_net:
